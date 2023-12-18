@@ -16,13 +16,17 @@ export const blogRoute = Router({})
 
 blogRoute.get('/', (req, res) => {
 
-    const blogs = BlogRepository.getAllBlogs()
+    const blogs = BlogRepository.getAllBlogs();
+
     res.send(blogs);
-})
+});
+
 
 
 blogRoute.get('/:id', (req: Request, res: Response) => {
+
     const id = req.params.id
+
     const blog = BlogRepository.getBlogById(id)
 
     if (!blog) {
@@ -30,7 +34,9 @@ blogRoute.get('/:id', (req: Request, res: Response) => {
         return
 
     }
+
     res.send(blog)
+
 })
 
 
