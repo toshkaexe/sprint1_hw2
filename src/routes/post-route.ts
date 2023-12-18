@@ -47,10 +47,10 @@ postRoute.post(
 
         const newPost = {
             id: randomUUID(),
-            title,
-            shortDescription,
-            content,
-            blogId,
+            title: title,
+            shortDescription: shortDescription,
+            content: content,
+            blogId: blogId,
             blogName: ""
         }
         PostRepository.createPost(newPost);
