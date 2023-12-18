@@ -26,6 +26,7 @@ postRoute.get('/:id', (req, res) => {
 
     if (!blog) {
         res.sendStatus(404)
+        return
 
     }
     res.send(blog)
