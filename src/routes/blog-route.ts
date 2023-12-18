@@ -10,6 +10,7 @@ import {
     RequestWithBody,
     RequestWithParams,
     RequestWithParamsAndBody} from "../models/common";
+import {CreateBlogModel} from "../models/blogs/input";
 
 
 export const blogRoute = Router({})
@@ -59,9 +60,13 @@ blogRoute.post(
     '/',
     authMiddleware,
     blogValidation(),
-    (req: RequestWithBody<BlogBody>, res: Response) => {
+    (req: RequestWithBody<CreateBlogModel>, res: Response) => {
 
-        let {name, description, websiteUrl} = req.body;
+        let {
+            name,
+            description,
+            websiteUrl} = req.body;
+
         const newBlog = {
             id: randomUUID(),
             name,
@@ -69,7 +74,7 @@ blogRoute.post(
             websiteUrl
         }
         BlogRepository.createBlog(newBlog);
-        return res.status(201).send(newBlog);
+        return res.send(201).send(newBlog);
     });
 
 
