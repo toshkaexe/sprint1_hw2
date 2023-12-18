@@ -1,10 +1,15 @@
 import {Router, Request, Response} from 'express';
 import {BlogRepository} from "../repositories/blog-repository";
 import {authMiddleware} from "../middlewares_validation/auth-middlewares";
-import {blogValidation, nameValidation} from "../validators/blog-validator";
+import {blogValidation, nameValidation} from "../validators/blog-validation";
 import {randomUUID} from "crypto";
 import {db} from '../db/db'
-import {BlogBody, Params, RequestWithBody, RequestWithParams, RequestWithParamsAndBody} from "../models/common";
+import {
+    BlogBody,
+    Params,
+    RequestWithBody,
+    RequestWithParams,
+    RequestWithParamsAndBody} from "../models/common";
 
 
 export const blogRoute = Router({})
@@ -33,16 +38,16 @@ blogRoute.put('/:id',
     authMiddleware,
     blogValidation(),
     (req: Request, res: Response) => {
-    const id = req.params.id
-    const blog = BlogRepository.getBlogById(id)
+        const id = req.params.id
+        const blog = BlogRepository.getBlogById(id)
 
-    if (!blog) {
-        res.sendStatus(404)
-        return
+        if (!blog) {
+            res.sendStatus(404)
+            return
 
-    }
-    res.send(blog)
-})
+        }
+        res.send(blog)
+    })
 
 blogRoute.post(
     '/',
@@ -60,18 +65,6 @@ blogRoute.post(
         BlogRepository.createBlog(newBlog);
         return res.status(201).send(newBlog);
     });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 blogRoute.put(

@@ -1,14 +1,14 @@
 import {Router, Request, Response} from 'express';
 import {BlogRepository} from "../repositories/blog-repository";
 import {authMiddleware} from "../middlewares_validation/auth-middlewares";
-import {blogValidation, nameValidation} from "../validators/blog-validator";
+import {blogValidation, nameValidation} from "../validators/blog-validation";
 import {PostRepository} from "../repositories/post-repository";
 
 import {BlogBody, Params, RequestWithBody, RequestWithParams} from "../models/common";
 import {randomUUID} from "crypto";
 import {blogRoute} from "./blog-route";
 import {CreatePostModel} from "../models/posts/input";
-import {postValidation} from "../validators/post-validator";
+import {postValidation} from "../validators/post-validation";
 import {db} from "../db/db";
 
 export const postRoute = Router({})
