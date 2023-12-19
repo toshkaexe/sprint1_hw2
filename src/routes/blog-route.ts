@@ -36,7 +36,7 @@ blogRoute.get('/:id', (req: Request, res: Response) => {
 
     }
 
-    res.send(blog)
+    res.status(200).send(blog)
 
 })
 
@@ -74,7 +74,7 @@ blogRoute.post(
             websiteUrl
         }
         BlogRepository.createBlog(newBlog);
-        return res.send(201).send(newBlog);
+        return res.status(201).send(newBlog);
     });
 
 
