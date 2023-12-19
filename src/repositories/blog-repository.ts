@@ -25,7 +25,7 @@ export class BlogRepository {
 
 
     static removeAllBlogs() {
-        db.blogs.splice(0, db.blogs.length);
+        db.blogs=[];
     }
 
 

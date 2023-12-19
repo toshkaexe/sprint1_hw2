@@ -28,7 +28,7 @@ export class PostRepository {
     }
 
     static removeAllPosts() {
-        db.posts.splice(0, db.posts.length);
+        db.posts=[];
     }
 
     static updatePost(params: UpdatePostModel, p1: Params) {

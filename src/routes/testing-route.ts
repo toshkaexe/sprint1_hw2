@@ -1,9 +1,10 @@
 import {Router, Request, Response} from 'express';
 import {BlogRepository} from "../repositories/blog-repository";
-import {authMiddleware} from "../middlewares_validation/auth-middlewares";
-import {blogValidation, nameValidation} from "../validators/blog-validation";
+
 import {StatusCode} from "../models/common";
 import {PostRepository} from "../repositories/post-repository";
+import {authMiddleware} from "../middlewares_validation/auth-middlewares";
+import {db} from "../db/db";
 
 export const testingRoute = Router({})
 

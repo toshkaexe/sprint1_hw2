@@ -54,7 +54,7 @@ postRoute.post(
             blogName: ""
         }
         PostRepository.createPost(newPost);
-        return res.send(201).send(newPost);
+        return res.status(201).send(newPost);
     });
 
 
