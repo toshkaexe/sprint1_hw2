@@ -39,20 +39,6 @@ blogRoute.get('/:id', (req: Request, res: Response) => {
 })
 
 
-blogRoute.put('/:id',
-    authMiddleware,
-    blogValidation(),
-    (req: Request, res: Response) => {
-        const id = req.params.id
-        const blog = BlogRepository.getBlogById(id)
-
-        if (!blog) {
-            res.sendStatus(404)
-            return
-
-        }
-        res.send(blog)
-    })
 
 blogRoute.post(
     '/',
@@ -114,6 +100,7 @@ blogRoute.delete('/:id',
         const blogIndex = db.blogs.findIndex((item) => item.id == id)
         if (blogIndex == -1) {
             res.sendStatus(404)
+            return
         }
         db.blogs.splice(blogIndex, 1)
         return res.sendStatus(204)
