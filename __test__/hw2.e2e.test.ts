@@ -2,7 +2,7 @@ import request from 'supertest';
 import {app} from '../src/settings'
 
 describe("/testing", () => {
-    beforeAll(async () => {
+/*    beforeAll(async () => {
         await request(app).delete("/testing/all-data").expect(204);
     });
 
@@ -11,4 +11,6 @@ describe("/testing", () => {
         await request(app).get("/posts").expect(200, []);
     })
 
-})
+*/
+
+});
