@@ -18,7 +18,7 @@ const blogIdValidation = body("blogId")
 const titleValidation = body("title")
     .isString()
     .trim()
-    .isLength({min: 5, max: 100})
+    .isLength({min: 5, max: 30})
     .withMessage("Incorrect title!");
 
 const contentValidation = body("content")
