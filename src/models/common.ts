@@ -56,6 +56,15 @@ export type BlogBody = {
     websiteUrl: string
 }
 
+export type PostBody = {
+
+    title: string,
+    shortDescription: string,
+    content: string,
+    blogId: string,
+    blogName: string
+
+}
 export type PostType = {
     id: string,
     title: string,
