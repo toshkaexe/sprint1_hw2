@@ -9,19 +9,17 @@ import {
     Params,
     RequestWithBody,
     RequestWithParams,
-    RequestWithParamsAndBody} from "../models/common";
+    RequestWithParamsAndBody
+} from "../models/common";
 import {CreateBlogModel} from "../models/blogs/input";
 
 
 export const blogRoute = Router({})
 
 blogRoute.get('/', (req, res) => {
-
     const blogs = BlogRepository.getAllBlogs();
-
     res.send(blogs);
 });
-
 
 
 blogRoute.get('/:id', (req: Request, res: Response) => {
@@ -65,7 +63,8 @@ blogRoute.post(
         let {
             name,
             description,
-            websiteUrl} = req.body;
+            websiteUrl
+        } = req.body;
 
         const newBlog = {
             id: randomUUID(),
