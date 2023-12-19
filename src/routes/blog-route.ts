@@ -97,7 +97,7 @@ blogRoute.put(
         blog.description = description;
         blog.websiteUrl = websiteUrl;
 
-        return res.sendStatus(204)
+        return res.status(204).send(blog)
 
     });
 
