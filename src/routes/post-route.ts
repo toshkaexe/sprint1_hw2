@@ -4,7 +4,14 @@ import {authMiddleware} from "../middlewares_validation/auth-middlewares";
 import {blogValidation, nameValidation} from "../validators/blog-validation";
 import {PostRepository} from "../repositories/post-repository";
 
-import {BlogBody, Params, RequestWithBody, RequestWithParams} from "../models/common";
+import {
+    BlogBody,
+    Params,
+    PostBody,
+    RequestWithBody,
+    RequestWithParams,
+    RequestWithParamsAndBody
+} from "../models/common";
 import {randomUUID} from "crypto";
 import {blogRoute} from "./blog-route";
 import {CreatePostModel} from "../models/posts/input";
@@ -62,10 +69,16 @@ postRoute.put('/:id',
     authMiddleware,
     postValidation(),
 
-    (req: RequestWithParams<Params>, res: Response) => {
+    (req: RequestWithParamsAndBody<Params,PostBody>, res: Response) => {
         const id = req.params.id;
-        const post = PostRepository.getPostById(id);
-        if (!post) {
+
+        let {title,
+            shortDescription,
+            content,
+            blogId} = req.body;
+
+        const updatedPost = PostRepository.getPostById(id);
+        if (!updatedPost) {
             res.sendStatus(404);
             return
         }
@@ -74,8 +87,13 @@ postRoute.put('/:id',
             res.sendStatus(404);
             return;
         }
-        db.posts.splice(postIndex, 1);
-        res.sendStatus(204);
+        updatedPost.content = content;
+        updatedPost.shortDescription = shortDescription;
+        updatedPost.title = title;
+        updatedPost.blogId = blogId;
+
+        // db.posts.splice(postIndex, 1);
+        res.status(204).send(updatedPost);
     });
 
 postRoute.delete('/:id',
