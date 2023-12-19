@@ -9,7 +9,7 @@ import {
     Params,
     RequestWithBody,
     RequestWithParams,
-    RequestWithParamsAndBody
+    RequestWithParamsAndBody, StatusCode
 } from "../models/common";
 import {CreateBlogModel} from "../models/blogs/input";
 
@@ -84,26 +84,26 @@ blogRoute.put(
     (req: RequestWithParamsAndBody<Params, BlogBody>, res: Response) => {
 
         const id = req.params.id;
-        let blog = BlogRepository.getBlogById(id);
+        let updatedBlog = BlogRepository.getBlogById(id);
+        console.log(updatedBlog)
 
         let {name, description, websiteUrl} = req.body;
 
-        if (!blog) {
+        if (!updatedBlog) {
             res.sendStatus(404);
             return;
         }
-        blog.name = name;
-        blog.description = description;
-        blog.websiteUrl = websiteUrl;
+        updatedBlog.name = name;
+        updatedBlog.description = description;
+        updatedBlog.websiteUrl = websiteUrl;
 
-        return res.status(204).send(blog)
+        return res.status(204).send(updatedBlog)
 
     });
 
 
 blogRoute.delete('/:id',
     authMiddleware,
-    blogValidation(),
     (req: RequestWithParams<Params>, res: Response) => {
         const id = req.params.id;
         const blog = BlogRepository.getBlogById(id);

@@ -58,6 +58,26 @@ postRoute.post(
     });
 
 
+postRoute.put('/:id',
+    authMiddleware,
+    postValidation(),
+
+    (req: RequestWithParams<Params>, res: Response) => {
+        const id = req.params.id;
+        const post = PostRepository.getPostById(id);
+        if (!post) {
+            res.sendStatus(404);
+            return
+        }
+        const postIndex = db.posts.findIndex((p) => p.id == id);
+        if (postIndex == -1) {
+            res.sendStatus(404);
+            return;
+        }
+        db.posts.splice(postIndex, 1);
+        res.sendStatus(204);
+    });
+
 postRoute.delete('/:id',
     authMiddleware,
 
