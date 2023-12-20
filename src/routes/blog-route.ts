@@ -70,19 +70,21 @@ blogRoute.put(
     (req: RequestWithParamsAndBody<Params, BlogBody>, res: Response) => {
 
         const id = req.params.id;
-        let updatedBlog = BlogRepository.getBlogById(id);
-        console.log(updatedBlog)
+        let blog = BlogRepository.getBlogById(id);
+        console.log(blog)
 
         let {name, description, websiteUrl} = req.body;
 
-        if (!updatedBlog) {
+        if (!blog) {
             res.sendStatus(404);
             return;
         }
-        updatedBlog.name = name;
-        updatedBlog.description = description;
-        updatedBlog.websiteUrl = websiteUrl;
-
+        const updatedBlog={
+            ...blog,
+            name: name,
+            description: description,
+            websiteUrl: websiteUrl
+        };
         return res.status(204).send(updatedBlog)
 
     });
